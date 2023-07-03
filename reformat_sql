@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+
+class SQLReformatter
+  def reformat(source_file, output_file)
+    file = File.open(output_file, "w")
+
+    File.readlines(source_file).each do |line|
+      temp = line.strip.chomp("\r\n").chomp("\n")
+      if (temp[0, 21] == "/*!40000 ALTER TABLE ") && ((temp[-16..-1] == " DISABLE KEYS;*/") || (temp[-15..-1] == " ENABLE KEYS;*/"))
+        # ignore line
+      else
+        file.write(line)
+      end
+    end
+
+    file.close
+  end
+  def self.handle_ui_command
+    if ARGV.count != 1
+      puts "Usage: ruby #{__FILE__} source_file"
+      return
+    end
+
+    source_file = ARGV.shift
+    if !File.exists?(source_file)
+      puts "Source file '#{source_file} doesn't exists"
+      return
+    end
+
+    dotpos = source_file.rindex(".")
+    if !dotpos.nil?
+      output_file = "#{source_file[0...dotpos]}-ed#{source_file[dotpos..-1]}"
+    else
+      output_file = "#{source_file}-ed"
+    end
+
+    if File.exists?(output_file)
+      response = ""
+      while !["y", "n"].include?(response.downcase)
+        print "Output file '#{output_file}' already exists. Overwrite? (y/n) "
+        response = gets.chomp
+      end
+
+      if response.downcase == "n"
+        return
+      end
+
+      File.delete(output_file)
+      if File.exists?(output_file)
+        puts "Cannot remove existing output file '#{output_file}'"
+        return
+      end
+    end
+
+    reformat(source_file, output_file)
+  end
+end
+
+
+SQLReformatter.handle_ui_command if $0 == __FILE__

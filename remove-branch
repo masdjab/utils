@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+class GitBranchRemover
+  def self.handle_ui_command
+    commands = [
+      "git branch -D <branch>", 
+      "git push --delete origin <branch>", 
+    ]
+
+    branches = ARGV.map{|a|a}
+    if branches.empty?
+      puts "Missing branch names"
+      return
+    end
+    if !(match = ["master", "main", "develop"] & branches).empty?
+      puts "About removing #{match.join(", ")} branches. Are you sure?"
+      puts "Type proceed to continue or anything else to abort."
+      print "Answer: "
+      return if STDIO.gets.chomp != "proceed"
+    end
+
+    branches.each do |b|
+      commands.each do |c|
+        cmd = c.gsub("<branch>", b)
+        puts cmd
+        Thread.new{system(cmd)}.join          
+      end
+    end
+  end
+end
+
+
+GitBranchRemover.handle_ui_command if $0 == __FILE__
