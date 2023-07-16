@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require_relative './libs/random_string'
+
+if !(1..2).include?(ARGV.length)
+  puts "Usage: random-string <length> [<char_table>]"
+  puts "Example:"
+  puts "  random-string 16"
+  puts "  random-string 16 abcdefghijklmnopqrstuvwxyz"
+elsif (len = Integer(ARGV[0]) rescue nil).nil?
+  puts "Invalid length parameter: #{ARGV[0].inspect}"
+else
+  char_table = ARGV.length == 2 ? ARGV[1] : nil
+  puts RandomString.generate len, char_table
+end
