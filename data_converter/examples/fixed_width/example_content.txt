@@ -1,0 +1,8 @@
+#        10        20        30        40        50
+;1234567890123456789012345678901234567890123456789012345
+name      city state zip      age     cur   amount
+Agus      Jogja, DIY, 55281   0021.3  USD   24.72
+Weweh     Solo, Jateng, 21822 0032.2  IDR   12500000
+Subawa    Ngawi, Jatim, 63256 0018.7  SGD   420.85
+Dodo      Subang, Jabar, 212120015.0  IDR   2500000
+

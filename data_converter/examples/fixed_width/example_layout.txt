@@ -1,0 +1,7 @@
+NO	FIELD	START	END	TYPE	LEN	DEC	POS	TEXT
+1	fld-1	1	10	A	10			Name
+2	fld-2	11	30	A	20			CSZ
+3	fld-3	31	36	A	6			Age
+4	fld-4	39	41	A	3			Currency
+5	fld-5	45	55	A	11			Credit
+
