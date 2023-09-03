@@ -1,0 +1,5 @@
+Name	CSZ	Age	Currency	Credit
+Agus	Jogja, DIY, 55281	0021.3	USD	24.72
+Weweh	Solo, Jateng, 21822	0032.2	IDR	12500000
+Subawa	Ngawi, Jatim, 63256	0018.7	SGD	420.85
+Dodo	Subang, Jabar, 21212	0015.0	IDR	2500000
